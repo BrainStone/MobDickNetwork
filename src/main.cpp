@@ -1,14 +1,14 @@
 #include "main.hpp"
 
 int main() {
-	std::cout << calculateScore( []( char in ) { return in; } ) << std::endl;   // Assumes next letter is the same
-	std::cout << calculateScore( []( char in ) { return '\0'; } ) << std::endl; // Assumes next letter is \0. (Which it never is. Shoudl return the size)
+	std::cout << "Training:\t" << s << std::endl;
+	std::cout << "Count:\t\t" << calculateScore( []( char in ) { return '\0'; } ) << std::endl;
 
-	char W[128 * 128];
-	char X[256 * 256];
-	char Y[512 * 512];
+	std::cout << "t = 0:\t\t" << calculateScore( S ) << std::endl;
 
-	saveWeights( "W", 128, W );
-	saveWeights( "X", 256, X );
-	saveWeights( "Y", 512, Y );
+	for ( size_t i = 0; i < 10; ++i ) {
+		train( s, W, S );
+		saveWeights( "W", s, W );
+		std::cout << "t = " << i << ":\t\t" << calculateScore( S ) << std::endl;
+	}
 }
