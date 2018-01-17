@@ -2,7 +2,7 @@
 
 int main() {
 	std::cout << "Training:\t" << s << std::endl;
-	std::cout << "Count:\t\t" << sizeMobyDick << std::endl;
+	std::cout << "Count:\t\t" << sizeMobyDick - 1 << std::endl;
 
 	std::cout << "t = 0:\t\t" << calculateScore( s, w, S ) << std::endl;
 
