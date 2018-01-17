@@ -1,10 +1,5 @@
 #include "training.hpp"
 
-int main() {
-	std::cout << calculateScore( []( char in ) { return in; } ) << std::endl;   // Assumes next letter is the same
-	std::cout << calculateScore( []( char in ) { return '\0'; } ) << std::endl; // Assumes next letter is \0. (Which it never is. Shoudl return the size)
-}
-
 unsigned int calculateScore( std::function<char( char )> predicter ) {
 	static const std::string mobyDick = getMobyDick();
 	static const size_t size = mobyDick.size();
@@ -18,6 +13,32 @@ unsigned int calculateScore( std::function<char( char )> predicter ) {
 	}
 
 	return score;
+}
+
+void train( const size_t numNodes, char* weights, std::function<char( char )> predicter ) {
+	const size_t weightsSize = numNodes * numNodes;
+	size_t i;
+	size_t weight;
+	unsigned int score;
+	unsigned int bestScore;
+	char bestWeight;
+
+	for ( size_t i = 0; i < weightsSize; ++i ) {
+		bestScore = std::numeric_limits<unsigned int>::max();
+		bestWeight = std::numeric_limits<char>::min();
+
+		for ( weight = bestWeight; weight < ((size_t)std::numeric_limits<char>::max()); ++weight ) {
+			weights[i] = ((char)weight);
+			score = calculateScore( predicter );
+
+			if ( score < bestScore ) {
+				bestScore = score;
+				bestWeight = ((char)weight);
+			}
+		}
+
+		weights[i] = bestWeight;
+	}
 }
 
 std::string getMobyDick() {
