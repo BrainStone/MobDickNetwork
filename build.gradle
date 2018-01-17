@@ -51,13 +51,13 @@ model {
     binaries {
         all {
             if (toolChain in Gcc) {
-                cppCompiler.args "-Wall", "-Wextra", "-Wpedantic", "-fPIC"
+                cppCompiler.args "-Wall", "-Wextra", "-Wpedantic", "-fPIC", "-std=c++14"
             }
             if (toolChain in Clang) {
-                cppCompiler.args "-Weverything", "-pedantic"
+                cppCompiler.args "-Weverything", "-pedantic", "-std=c++14"
             }
             if (toolChain in VisualCpp) {
-                cppCompiler.args "/W4", "/FS", "/EHsc"
+                cppCompiler.args "/W4", "/FS", "/EHsc", "/std:c++14"
             }
             
             if(buildType == buildTypes.debug) {
