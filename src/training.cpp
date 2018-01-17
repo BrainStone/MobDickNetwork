@@ -45,7 +45,7 @@ void train( const size_t numNodes, char* weights, std::function<char( char )> pr
 void saveWeights( const std::string& name, const size_t numNodes, const char const* weights ) {
 	std::ofstream weightFile( "weights/" + name );
 
-	weightFile << "char[s*s] " << name << "=R\"delim(";
+	weightFile << "char* " << name << "=R\"delim(";
 	weightFile.write( weights, numNodes * numNodes );
 	weightFile << ")delim\";";
 }
