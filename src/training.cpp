@@ -17,8 +17,7 @@ unsigned int calculateScore( std::function<char( char )> predicter ) {
 
 void train( const size_t numNodes, char* weights, std::function<char( char )> predicter ) {
 	const size_t weightsSize = numNodes * numNodes;
-	size_t i;
-	size_t weight;
+	short weight;
 	unsigned int score;
 	unsigned int bestScore;
 	char bestWeight;
@@ -27,7 +26,7 @@ void train( const size_t numNodes, char* weights, std::function<char( char )> pr
 		bestScore = std::numeric_limits<unsigned int>::max();
 		bestWeight = std::numeric_limits<char>::min();
 
-		for ( weight = bestWeight; weight < ((size_t)std::numeric_limits<char>::max()); ++weight ) {
+		for ( weight = ((short)bestWeight); weight < ((short)std::numeric_limits<char>::max()); ++weight ) {
 			weights[i] = ((char)weight);
 			score = calculateScore( predicter );
 
@@ -45,7 +44,7 @@ void train( const size_t numNodes, char* weights, std::function<char( char )> pr
 void saveWeights( const std::string& name, const size_t numNodes, const char const* weights ) {
 	std::ofstream weightFile( "weights/" + name );
 
-	weightFile << "char* " << name << "=R\"delim(";
+	weightFile << "char* T=R\"delim(";
 	weightFile.write( weights, numNodes * numNodes );
 	weightFile << ")delim\";";
 }

@@ -8,7 +8,7 @@ int main() {
 
 	for ( size_t i = 0; i < 10; ++i ) {
 		train( s, W, S );
-		saveWeights( "W", s, W );
+		saveWeights( "16", s, W );
 		std::cout << "t = " << i << ":\t\t" << calculateScore( S ) << std::endl;
 	}
 }

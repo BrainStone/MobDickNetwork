@@ -2,9 +2,11 @@
 #include "network.hpp"
 
 const size_t s = 128;
-//char w[s];
-char* w = new char[s];
+#include <cstring>
+
 #include "W"
+char* w = new char[s];
+char* W = (char *) memcpy( new char[s*s], T, s*s );
 char S( char i ) {
 	char n[s];
 
