@@ -4,15 +4,12 @@ const std::string mobyDick = getMobyDick();
 const size_t sizeMobyDick = mobyDick.size();
 
 unsigned int calculateScore( const size_t numNodes, char* nodes, std::function<char( char )> predicter ) {
+	std::fill_n( nodes, numNodes, 0 );
+	
 	unsigned int score = 0;
-	size_t i;
 
-	for ( i = 0; i < numNodes; ++i ) {
-		nodes[i] = 0;
-	}
-
-	for ( i = 0; i < (sizeMobyDick - 1); ++i ) {
-		if ( predicter( mobyDick[i] ) != mobyDick[i + 1] ) {
+	for ( size_t i = 0; i < (sizeMobyDick - 1); ) {
+		if ( predicter( mobyDick[i] ) != mobyDick[++i] ) {
 			++score;
 		}
 	}
