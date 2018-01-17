@@ -2,7 +2,7 @@
 
 int main() {
 	std::cout << "Training:\t" << s << std::endl;
-	std::cout << "Count:\t\t" << calculateScore( []( char in ) { return '\0'; } ) << std::endl;
+	std::cout << "Count:\t\t" << calculateScore( []( char ) { return '\0'; } ) << std::endl;
 
 	std::cout << "t = 0:\t\t" << calculateScore( S ) << std::endl;
 

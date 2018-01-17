@@ -38,12 +38,12 @@ void train( const size_t numNodes, char* weights, std::function<char( char )> pr
 
 		weights[i] = bestWeight;
 
-		std::cout << "Training Step " << i + 1 << " of " << weightsSize << " complete..." << std::endl;
+		std::cout << "\t\tTraining Step " << i + 1 << " of " << weightsSize << " complete..." << std::endl;
 	}
 }
 
 // This method generates a file that assigns a string literal to a variable called name
-void saveWeights( const std::string& name, const size_t numNodes, const char const* weights ) {
+void saveWeights( const std::string& name, const size_t numNodes, const char* const weights ) {
 	std::ofstream weightFile( "weights/" + name );
 
 	weightFile << "char* T=R\"delim(";

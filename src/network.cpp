@@ -3,17 +3,19 @@
 
 #include <cstring>
 
-const size_t s = 4;
+const int s = 4;
 #include "W"
 char* w = new char[s];
 char* W = (char *) memcpy( new char[s*s], T, s*s );
 char S( char i ) {
 	char n[s];
+	int j, k, l;
 
 	w[0] = i;
-	for ( size_t j = 1; j < s; ++j ) {
-		for ( size_t k = 0; k < s; ++k ) {
-			n[j] += w[k] * W[s*j + k];
+	for ( j = 1; j < s; ++j ) {
+		l = s*j;
+		for ( k = 0; k < s; ++k ) {
+			n[j] += w[k] * W[l + k];
 		}
 	}
 

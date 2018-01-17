@@ -1,7 +1,7 @@
 #pragma once
 
 // The size value
-extern const size_t s;
+extern const int s;
 // The actual nodes
 extern char* w;
 // The weights nodes
