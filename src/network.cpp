@@ -1,9 +1,9 @@
 // Not part of actual solution!
 #include "network.hpp"
 
-const size_t s = 128;
 #include <cstring>
 
+const size_t s = 4;
 #include "W"
 char* w = new char[s];
 char* W = (char *) memcpy( new char[s*s], T, s*s );

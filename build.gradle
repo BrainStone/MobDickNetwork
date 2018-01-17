@@ -87,7 +87,7 @@ model {
                     cppCompiler.args "-Ofast", "-g0"
                 }
                 if (toolChain in VisualCpp) {
-                    cppCompiler.args "/O2"
+                    cppCompiler.args "/O1"
                 }
             }
         }

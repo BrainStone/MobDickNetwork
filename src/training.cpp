@@ -37,6 +37,8 @@ void train( const size_t numNodes, char* weights, std::function<char( char )> pr
 		}
 
 		weights[i] = bestWeight;
+
+		std::cout << "Training Step " << i + 1 << " of " << weightsSize << " complete..." << std::endl;
 	}
 }
 
