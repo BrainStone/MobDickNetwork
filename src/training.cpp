@@ -1,12 +1,17 @@
 #include "training.hpp"
 
-unsigned int calculateScore( std::function<char( char )> predicter ) {
-	static const std::string mobyDick = getMobyDick();
-	static const size_t size = mobyDick.size();
+const std::string mobyDick = getMobyDick();
+const size_t sizeMobyDick = mobyDick.size();
 
+unsigned int calculateScore( const size_t numNodes, char* nodes, std::function<char( char )> predicter ) {
 	unsigned int score = 0;
+	size_t i;
 
-	for ( size_t i = 0; i < (size - 1); ++i ) {
+	for ( i = 0; i < numNodes; ++i ) {
+		nodes[i] = 0;
+	}
+
+	for ( i = 0; i < (sizeMobyDick - 1); ++i ) {
 		if ( predicter( mobyDick[i] ) != mobyDick[i + 1] ) {
 			++score;
 		}
@@ -15,7 +20,7 @@ unsigned int calculateScore( std::function<char( char )> predicter ) {
 	return score;
 }
 
-void train( const size_t numNodes, char* weights, std::function<char( char )> predicter ) {
+void train( const size_t numNodes, char* nodes, char* weights, std::function<char( char )> predicter ) {
 	const size_t weightsSize = numNodes * numNodes;
 	short weight;
 	unsigned int score;
@@ -28,7 +33,7 @@ void train( const size_t numNodes, char* weights, std::function<char( char )> pr
 
 		for ( weight = ((short)bestWeight); weight < ((short)std::numeric_limits<char>::max()); ++weight ) {
 			weights[i] = ((char)weight);
-			score = calculateScore( predicter );
+			score = calculateScore( numNodes, nodes, predicter );
 
 			if ( score < bestScore ) {
 				bestScore = score;
