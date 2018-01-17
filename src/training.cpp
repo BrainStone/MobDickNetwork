@@ -43,9 +43,9 @@ void train( const size_t numNodes, char* weights, std::function<char( char )> pr
 
 // This method generates a file that assigns a string literal to a variable called name
 void saveWeights( const std::string& name, const size_t numNodes, const char const* weights ) {
-	std::ofstream weightFile( name );
+	std::ofstream weightFile( "weights/" + name );
 
-	weightFile << name << "=R\"delim(";
+	weightFile << "char[s*s] " << name << "=R\"delim(";
 	weightFile.write( weights, numNodes * numNodes );
 	weightFile << ")delim\";";
 }

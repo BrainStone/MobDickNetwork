@@ -41,6 +41,10 @@ model {
                     include "**/*.cpp"
                 }
                 exportedHeaders {
+                    srcDirs "weights"
+                    include "*"
+                }
+                exportedHeaders {
                     srcDirs "src"
                     include "**/*.hpp"
                 }
