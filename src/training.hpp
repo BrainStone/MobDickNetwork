@@ -7,6 +7,8 @@
 #include <limits>
 #include <string>
 
+#include "debug.hpp"
+
 extern const std::string mobyDick;
 extern const size_t sizeMobyDick;
 

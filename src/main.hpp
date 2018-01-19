@@ -1,6 +1,6 @@
 #pragma once
 
-#include "training.hpp"
 #include "network.hpp"
+#include "training.hpp"
 
 int main();

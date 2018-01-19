@@ -23,6 +23,8 @@ void train( const size_t numNodes, char* nodes, char* weights, std::function<cha
 	unsigned int score;
 	unsigned int bestScore;
 	char bestWeight;
+    
+    hexDumpMemory(weights, weightsSize);
 
 	for ( size_t i = 0; i < weightsSize; ++i ) {
 		bestScore = std::numeric_limits<unsigned int>::max();
@@ -41,6 +43,7 @@ void train( const size_t numNodes, char* nodes, char* weights, std::function<cha
 		weights[i] = bestWeight;
 
 		std::cout << "\t\tTraining Step " << i + 1 << " of " << weightsSize << " complete..." << std::endl;
+        hexDumpMemory(weights, weightsSize);
 	}
 }
 
