@@ -10,6 +10,9 @@ uint8_t* w = new uint8_t[s];
 uint8_t* W = (uint8_t *) memcpy( new uint8_t[s*s],
 #include "W"
 , s*s );
+const uint8_t* const chars = (uint8_t *) R"xxx( etaonsihrldumcwgf,ypbvk.-
+;|"'ATS!HBWEqNCPx?OLjRFMDGzYQJU():KV1028573*4Z69X_$&[] etaonsihrldumcwgf,ypbvk.-
+;|"'ATS!HBWEqNCPx?OL)xxx";
 uint8_t S( uint8_t i ) {
 	int j, k, l;
 
@@ -26,5 +29,5 @@ uint8_t S( uint8_t i ) {
 	w = v;
 	v = t;
 
-	return w[s - 1] & 127;
+	return chars[w[s - 1] & 127];
 }
