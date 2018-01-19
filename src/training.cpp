@@ -67,7 +67,7 @@ void train( const size_t numNodes, uint8_t*& nodes, uint8_t* weights, std::funct
 	hexDumpMemory(weights, weightsSize);
 }
 
-void applyMask( const size_t weightsSize, uint8_t*& weights, const uint8_t mask ) {
+void applyMask( const size_t weightsSize, uint8_t* weights, const uint8_t mask ) {
     for ( size_t i = 0; i < weightsSize; ++i) {
         weights[i] ^= mask;
     }
