@@ -3,9 +3,9 @@
 // The size value
 extern const int s;
 // The actual nodes
-extern char* w;
+extern uint8_t* w;
 // The weights nodes
-extern char* W;
+extern uint8_t* W;
 
 // The predicter method
-char S( char i );
+uint8_t S( uint8_t i );

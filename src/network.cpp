@@ -5,10 +5,10 @@
 
 const int s = 4;
 #include "W"
-char* v = new char[s];
-char* w = new char[s];
-char* W = (char *) memcpy( new char[s*s], T, s*s );
-char S( char i ) {
+uint8_t* v = new uint8_t[s];
+uint8_t* w = new uint8_t[s];
+uint8_t* W = (uint8_t *) memcpy( new uint8_t[s*s], T, s*s );
+uint8_t S( uint8_t i ) {
 	int j, k, l;
 
 	w[0] = i;
@@ -19,7 +19,7 @@ char S( char i ) {
 		}
 	}
 
-	char *t = w;
+	uint8_t *t = w;
 	w = v;
 	v = t;
 
