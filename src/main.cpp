@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 int main() {
-	std::cout << w << std::endl << W << std::endl;
+	hexDumpMemory(W, s*s);
 	std::cout << "Training:\t" << s << std::endl;
 	std::cout << "Count:\t\t" << sizeMobyDick - 1 << std::endl;
 

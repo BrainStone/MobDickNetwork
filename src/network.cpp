@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <cstring>
 
-const int s = 4;
+const int s = 8;
 #include "W"
 uint8_t* v = new uint8_t[s];
 uint8_t* w = new uint8_t[s];
@@ -15,6 +15,7 @@ uint8_t S( uint8_t i ) {
 	w[0] = i;
 	for ( j = 1; j < s; ++j ) {
 		l = s*j;
+        v[j] = 0;
 		for ( k = 0; k < s; ++k ) {
 			v[j] += w[k] * W[l + k];
 		}

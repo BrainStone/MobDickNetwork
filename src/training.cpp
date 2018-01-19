@@ -3,7 +3,7 @@
 const std::string mobyDick = getMobyDick();
 const size_t sizeMobyDick = mobyDick.size();
 
-unsigned int calculateScore( const size_t numNodes, uint8_t* nodes, std::function<uint8_t( uint8_t )> predicter ) {
+unsigned int calculateScore( const size_t numNodes, uint8_t*& nodes, std::function<uint8_t( uint8_t )> predicter ) {
 	std::fill_n( nodes, numNodes, 0 );
 	
 	unsigned int score = 0;
@@ -17,7 +17,7 @@ unsigned int calculateScore( const size_t numNodes, uint8_t* nodes, std::functio
 	return score;
 }
 
-void train( const size_t numNodes, uint8_t* nodes, uint8_t* weights, std::function<uint8_t( uint8_t )> predicter ) {
+void train( const size_t numNodes, uint8_t*& nodes, uint8_t* weights, std::function<uint8_t( uint8_t )> predicter ) {
 	const size_t weightsSize = numNodes * numNodes;
 	short weight;
 	unsigned int score;
@@ -26,11 +26,11 @@ void train( const size_t numNodes, uint8_t* nodes, uint8_t* weights, std::functi
     
     hexDumpMemory(weights, weightsSize);
 
-	for ( size_t i = 1; i < weightsSize; ++i ) {
+	for ( size_t i = numNodes; i < weightsSize; ++i ) {
 		bestScore = std::numeric_limits<unsigned int>::max();
 		bestWeight = std::numeric_limits<uint8_t>::min();
 
-		for ( weight = ((short)bestWeight); weight < ((short)std::numeric_limits<uint8_t>::max()); ++weight ) {
+		for ( weight = ((short)bestWeight); weight <= ((short)std::numeric_limits<uint8_t>::max()); ++weight ) {
 			weights[i] = ((uint8_t)weight);
 			score = calculateScore( numNodes, nodes, predicter );
 
@@ -42,7 +42,7 @@ void train( const size_t numNodes, uint8_t* nodes, uint8_t* weights, std::functi
 
 		weights[i] = bestWeight;
 
-		std::cout << "\t\tTraining Step " << i << " of " << weightsSize - 1 << " complete..." << std::endl;
+		std::cout << "\t\tTraining Step " << (i - numNodes) + 1 << " of " << weightsSize - numNodes << " complete... (" << bestScore << ')' << std::endl;
         hexDumpMemory(weights, weightsSize);
 	}
 }
