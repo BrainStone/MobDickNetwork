@@ -29,7 +29,7 @@ void train( const size_t numNodes, uint8_t*& nodes, uint8_t* weights, std::funct
 		bestScore = std::numeric_limits<unsigned int>::max();
 		bestWeight = std::numeric_limits<uint8_t>::min();
 
-		for ( weight = ((short)bestWeight); weight <= ((short)std::numeric_limits<uint8_t>::max()); ++weight ) {
+		for ( weight = ((short)bestWeight); weight <= ((short)(std::numeric_limits<uint8_t>::max() >> 1)); ++weight ) {
             calcWeight = (uint8_t)weight;
 			weights[i] = calcWeight;
 			score = calculateScore( numNodes, nodes, predicter );
@@ -49,7 +49,7 @@ void train( const size_t numNodes, uint8_t*& nodes, uint8_t* weights, std::funct
     bestScore = std::numeric_limits<unsigned int>::max();
     bestWeight = std::numeric_limits<uint8_t>::min();
 
-    for ( weight = ((short)bestWeight); weight <= ((short)std::numeric_limits<uint8_t>::max()); ++weight ) {
+    for ( weight = ((short)bestWeight); weight <= ((short)(std::numeric_limits<uint8_t>::max() >> 1)); ++weight ) {
         calcWeight = (uint8_t)weight;
         applyMask(weightsSize, weights, calcWeight);
         score = calculateScore( numNodes, nodes, predicter );
