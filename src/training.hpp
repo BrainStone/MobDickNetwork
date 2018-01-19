@@ -9,6 +9,9 @@
 
 #include "debug.hpp"
 
+#undef max
+#undef min
+
 extern const std::string mobyDick;
 extern const size_t sizeMobyDick;
 
