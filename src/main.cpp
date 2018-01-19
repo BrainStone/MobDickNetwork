@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
     
     size_t score;
     size_t oldScore = 0;
-    size_t bestScore = 0;
+    size_t bestScore = sizeMobyDick;
     size_t t = 0;
     bool trainingStalled;
     
@@ -33,15 +33,17 @@ int main(int argc, char* argv[]) {
         
         if(trainingStalled) {
             std::cout << "Training Stalled! Forcing training..." << std::endl;
-        } else {
-            bestScore = std::min(bestScore, score);
         }
         
 		train( s, w, W, S, trainingStalled );
-		saveWeights( std::to_string(s), s, W );
         
         oldScore = score;
         score = calculateScore( s, w, S );
+        
+        if( score < bestScore) {
+            saveWeights( std::to_string(s), s, W );
+            bestScore = score;
+        }
         
 		std::cout << "t = " << ++t << ":\t\t" << score << std::endl;
 	} while ( trainingStalled || (score <= bestScore) );
