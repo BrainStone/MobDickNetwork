@@ -20,6 +20,7 @@ unsigned int calculateScore( const size_t numNodes, uint8_t*& nodes, std::functi
 void train( const size_t numNodes, uint8_t*& nodes, uint8_t* weights, std::function<uint8_t( uint8_t )> predicter ) {
 	const size_t weightsSize = numNodes * numNodes;
 	short weight;
+    uint8_t calcWeight;
 	unsigned int score;
 	unsigned int bestScore;
 	uint8_t bestWeight;
@@ -29,20 +30,47 @@ void train( const size_t numNodes, uint8_t*& nodes, uint8_t* weights, std::funct
 		bestWeight = std::numeric_limits<uint8_t>::min();
 
 		for ( weight = ((short)bestWeight); weight <= ((short)std::numeric_limits<uint8_t>::max()); ++weight ) {
-			weights[i] = ((uint8_t)weight);
+            calcWeight = (uint8_t)weight;
+			weights[i] = calcWeight;
 			score = calculateScore( numNodes, nodes, predicter );
 
 			if ( score < bestScore ) {
 				bestScore = score;
-				bestWeight = ((uint8_t)weight);
+				bestWeight = calcWeight;
 			}
 		}
 
 		weights[i] = bestWeight;
 
-		std::cout << "\t\tTraining Step " << i << " of " << weightsSize - 1 << " complete... (" << bestScore << ')' << std::endl;
+		std::cout << "\t\tTraining Step " << i << " of " << weightsSize << " complete... (" << bestScore << ')' << std::endl;
         hexDumpMemory(weights, weightsSize);
 	}
+	
+    bestScore = std::numeric_limits<unsigned int>::max();
+    bestWeight = std::numeric_limits<uint8_t>::min();
+
+    for ( weight = ((short)bestWeight); weight <= ((short)std::numeric_limits<uint8_t>::max()); ++weight ) {
+        calcWeight = (uint8_t)weight;
+        applyMask(weightsSize, weights, calcWeight);
+        score = calculateScore( numNodes, nodes, predicter );
+        applyMask(weightsSize, weights, calcWeight);
+
+        if ( score < bestScore ) {
+            bestScore = score;
+            bestWeight = calcWeight;
+        }
+    }
+    
+    applyMask(weightsSize, weights, bestWeight);
+	
+	std::cout << "\t\tTraining Step " << weightsSize << " of " << weightsSize << " complete... (" << bestScore << ')' << std::endl;
+	hexDumpMemory(weights, weightsSize);
+}
+
+void applyMask( const size_t weightsSize, uint8_t*& weights, const uint8_t mask ) {
+    for ( size_t i = 0; i < weightsSize; ++i) {
+        weights[i] ^= mask;
+    }
 }
 
 // This method generates a file that assigns a string literal to a variable called name
