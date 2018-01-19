@@ -14,8 +14,9 @@ int main(int argc, char* argv[]) {
         randomizeWeights(s * s, W, seed);
     }
     
-    size_t oldScore = 0;
     size_t score;
+    size_t oldScore = 0;
+    size_t bestScore = 0;
     size_t t = 0;
     bool trainingStalled;
     
@@ -30,6 +31,12 @@ int main(int argc, char* argv[]) {
 	do {
         trainingStalled = (oldScore == score);
         
+        if(trainingStalled) {
+            std::cout << "Training Stalled! Forcing training..." << std::endl;
+        } else {
+            bestScore = std::min(bestScore, score);
+        }
+        
 		train( s, w, W, S, trainingStalled );
 		saveWeights( std::to_string(s), s, W );
         
@@ -37,7 +44,7 @@ int main(int argc, char* argv[]) {
         score = calculateScore( s, w, S );
         
 		std::cout << "t = " << ++t << ":\t\t" << score << std::endl;
-	} while ( !trainingStalled || (oldScore > score) );
+	} while ( trainingStalled || (score <= bestScore) );
 }
 
 void randomizeWeights( const size_t weightsSize, uint8_t* weights, const uint8_t seed ) {
