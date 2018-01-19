@@ -5,10 +5,11 @@
 #include <cstring>
 
 const int s = 8;
-#include "W"
 uint8_t* v = new uint8_t[s];
 uint8_t* w = new uint8_t[s];
-uint8_t* W = (uint8_t *) memcpy( new uint8_t[s*s], T, s*s );
+uint8_t* W = (uint8_t *) memcpy( new uint8_t[s*s],
+#include "W"
+, s*s );
 uint8_t S( uint8_t i ) {
 	int j, k, l;
 
