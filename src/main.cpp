@@ -14,9 +14,10 @@ int main(int argc, char* argv[]) {
         randomizeWeights(s * s, W, seed);
     }
     
-    size_t oldScore;
+    size_t oldScore = 0;
     size_t score;
     size_t t = 0;
+    bool trainingStalled;
     
 	hexDumpMemory(W, s*s);
 	std::cout << "Training:\t" << s << std::endl;
@@ -27,14 +28,16 @@ int main(int argc, char* argv[]) {
 	std::cout << "t = 0:\t\t" << score << std::endl;
 
 	do {
-		train( s, w, W, S );
+        trainingStalled = (oldScore == score);
+        
+		train( s, w, W, S, trainingStalled );
 		saveWeights( std::to_string(s), s, W );
         
         oldScore = score;
         score = calculateScore( s, w, S );
         
 		std::cout << "t = " << ++t << ":\t\t" << score << std::endl;
-	} while ( oldScore != score );
+	} while ( !trainingStalled || (oldScore > score) );
 }
 
 void randomizeWeights( const size_t weightsSize, uint8_t* weights, const uint8_t seed ) {

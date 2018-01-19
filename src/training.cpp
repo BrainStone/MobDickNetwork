@@ -17,20 +17,27 @@ unsigned int calculateScore( const size_t numNodes, uint8_t*& nodes, std::functi
 	return score;
 }
 
-void train( const size_t numNodes, uint8_t*& nodes, uint8_t* weights, std::function<uint8_t( uint8_t )> predicter ) {
+void train( const size_t numNodes, uint8_t*& nodes, uint8_t* weights, std::function<uint8_t( uint8_t )> predicter, bool forceChange ) {
 	const size_t weightsSize = numNodes * numNodes;
 	short weight;
     uint8_t calcWeight;
 	unsigned int score;
 	unsigned int bestScore;
 	uint8_t bestWeight;
+    uint8_t origWeight;
 
 	for ( size_t i = 1; i < weightsSize; ++i ) {
 		bestScore = std::numeric_limits<unsigned int>::max();
 		bestWeight = std::numeric_limits<uint8_t>::min();
+        origWeight = weights[i];
 
 		for ( weight = ((short)bestWeight); weight <= ((short)(std::numeric_limits<uint8_t>::max() >> 1)); ++weight ) {
             calcWeight = (uint8_t)weight;
+            
+            if(forceChange && (calcWeight == origWeight)) {
+                continue;
+            }
+            
 			weights[i] = calcWeight;
 			score = calculateScore( numNodes, nodes, predicter );
 
