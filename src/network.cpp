@@ -1,6 +1,7 @@
 // Not part of actual solution!
 #include "network.hpp"
 
+#include <cstdint>
 #include <cstring>
 
 const int s = 4;

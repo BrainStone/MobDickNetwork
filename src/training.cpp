@@ -52,7 +52,7 @@ void saveWeights( const std::string& name, const size_t numNodes, const uint8_t*
 	std::ofstream weightFile( "weights/" + name );
 
 	weightFile << "char* T=R\"delim(";
-	weightFile.write( weights, numNodes * numNodes );
+	weightFile.write( (char*) weights, numNodes * numNodes );
 	weightFile << ")delim\";";
 }
 

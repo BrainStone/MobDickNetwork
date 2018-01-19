@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 // The size value
 extern const int s;
 // The actual nodes
