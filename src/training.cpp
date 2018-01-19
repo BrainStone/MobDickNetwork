@@ -23,8 +23,6 @@ void train( const size_t numNodes, uint8_t*& nodes, uint8_t* weights, std::funct
 	unsigned int score;
 	unsigned int bestScore;
 	uint8_t bestWeight;
-    
-    hexDumpMemory(weights, weightsSize);
 
 	for ( size_t i = numNodes; i < weightsSize; ++i ) {
 		bestScore = std::numeric_limits<unsigned int>::max();
