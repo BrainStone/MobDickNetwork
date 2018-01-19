@@ -15,7 +15,7 @@ uint8_t S( uint8_t i ) {
 	w[0] = i;
 	for ( j = 1; j < s; ++j ) {
 		l = s*j;
-        v[j] = 0;
+        v[j] = W[j];
 		for ( k = 0; k < s; ++k ) {
 			v[j] += w[k] * W[l + k];
 		}
